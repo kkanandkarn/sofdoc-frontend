@@ -1,12 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "./authSlice";
-import sidebarReducer from "./sidebarSlice";
-
-const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    sidebar: sidebarReducer,
-  },
+import { rootReducer } from "./rootReducer";
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
+  devTools: import.meta.env.VITE_NODE_ENV !== "production",
 });
-
-export default store;
