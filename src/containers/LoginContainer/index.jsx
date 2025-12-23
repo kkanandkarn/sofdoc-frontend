@@ -8,12 +8,14 @@ import { validate } from "../../validations";
 import { notifier } from "../../components/Notifier";
 import { useDispatch } from "react-redux";
 import { userLogin } from "./../../store/slices/Auth/AuthThunk";
+import { useNavigate } from "react-router-dom";
 
 const LoginContainer = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [state, setState] = useState({
-    username: "anandkrkarn",
-    password: "Anayka@2019",
+    username: "",
+    password: "",
   });
   const [errors, setErrors] = useState({
     username: "",
@@ -42,8 +44,11 @@ const LoginContainer = () => {
       return;
     }
 
-    const res = await dispatch(userLogin(state)).unwrap();
-    console.log("API RESPONSE: ", res);
+    notifier.success("Login Successfull.");
+    navigate("/vault");
+
+    // const res = await dispatch(userLogin(state)).unwrap();
+    // console.log("API RESPONSE: ", res);
   };
 
   return (
