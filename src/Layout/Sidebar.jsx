@@ -31,66 +31,66 @@ const Sidebar = () => {
   const isActiveMenu = (route) => location.pathname.includes(route);
 
   return (
-    <div>
+    <div className="">
       <div
         className={`${
           sidebarOpen ? "w-64" : "w-20"
-        } bg-primary text-white h-screen duration-300 ease-in-out relative py-4`}
+        } bg-white rounded-lg text-white h-screen duration-300 ease-in-out relative py-4`}
       >
-        <div className="flex justify-end absolute top-2 right-[-25px]">
-          <button
-            className="bg-primary text-primaryColor px-1 py-4 rounded-r-lg cursor-pointer ease-in-out duration-300"
-            onClick={handleSidebar}
-          >
-            {sidebarOpen ? (
-              <IoIosArrowBack size={20} />
-            ) : (
-              <IoIosArrowForward size={20} />
-            )}
-          </button>
-        </div>
         <div
-          className={`flex flex-col justify-start ${
-            sidebarOpen && "items-center"
-          } mb-4 px-4 border-b pb-4 border-gray-600 ease-in-out duration-300`}
+          className={`flex flex-col justify-center items-start gap-2 text-black mb-4 px-4 border-b pb-4 border-gray-600 ease-in-out duration-300`}
         >
-          <IoCloudUploadOutline />
-          {sidebarOpen && (
-            <h1 className="font-poppins text-gray-300 text-sm mt-2">
-              A Complete ERP Solution
-            </h1>
-          )}
-        </div>
-        {/* <ul className="px-4 ease-in-out duration-300">
-        {menuItems?.map((menuItem) => (
-          <li
-            key={menuItem.name}
-            className={`mb-4 cursor-pointer`}
-            onClick={() => handleMenuClick(menuItem.route)}
-          >
-            <div
-              className={`text-left px-4 py-2 rounded-md font-Poppins flex items-center gap-2 text-white ${
-                isActiveMenu(menuItem.route) ? "bg-slate-800" : ""
-              }`}
-              data-tooltip-id={`tooltip-${menuItem.name}`} // Tooltip ID
-              data-tooltip-content={menuItem.name} // Tooltip Content
-            >
-              <div
-                className={`${
-                  isActiveMenu(menuItem.route) ? "text-orange-400" : ""
-                }`}
-              >
-                {menuItem.icon}
-              </div>
-              {sidebarOpen && menuItem.name}
+          <div className="flex items-center justify-start gap-4">
+            <div className="text-blue-500 text-2xl">
+              {" "}
+              <IoCloudUploadOutline />
             </div>
 
-            {!sidebarOpen && (
-              <Tooltip id={`tooltip-${menuItem.name}`} place="right" />
-            )}
-          </li>
-        ))}
-      </ul> */}
+            <h1 className="font-poppins text-black font-bold text-xl">
+              <span className="text-blue-500">S</span>of
+              <span className="text-blue-500">D</span>oc
+            </h1>
+          </div>
+          <div>
+            <h1 className="text-sm text-gray-600">
+              Cloud File Management and Migration
+            </h1>
+          </div>
+        </div>
+        <ul className="px-4 ease-in-out duration-300">
+          {menuItems?.map((menuItem) => (
+            <li
+              key={menuItem.name}
+              className={`mb-4 cursor-pointer`}
+              onClick={() => handleMenuClick(menuItem.route)}
+            >
+              <div
+                className={`text-left border-l-4 px-4 py-2 font-bold rounded-md font-Poppins flex items-center gap-2  ${
+                  isActiveMenu(menuItem.route)
+                    ? "bg-blue-100 text-blue-400 "
+                    : "text-gray-600 border-white"
+                }`}
+                data-tooltip-id={`tooltip-${menuItem.name}`} // Tooltip ID
+                data-tooltip-content={menuItem.name} // Tooltip Content
+              >
+                <div
+                  className={`${
+                    isActiveMenu(menuItem.route)
+                      ? "text-blue-600"
+                      : "text-gray-600"
+                  }`}
+                >
+                  {menuItem.icon}
+                </div>
+                {menuItem.label}
+              </div>
+
+              {!sidebarOpen && (
+                <Tooltip id={`tooltip-${menuItem.name}`} place="right" />
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

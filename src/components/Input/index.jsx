@@ -21,7 +21,7 @@ const COMPONENT_MAP = {
 };
 
 const InputBox = (props) => {
-  const authData = useSelector((state) => state.Auth);
+  const authData = useSelector((state) => state.auth);
 
   useEffect(() => {
     document.documentElement.classList.toggle(

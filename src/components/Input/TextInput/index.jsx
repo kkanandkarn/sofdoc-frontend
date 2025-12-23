@@ -2,14 +2,22 @@ import React from "react";
 
 const TextInput = (props) => {
   return (
-    <div className="h-28 w-full px-2 flex flex-col gap-2">
-      <label className="text-sm text-left font-poppins block mb-1 text-[#1976d2] font-bold dark:font-light dark:text-white">
-        {props.label} {props.required && "*"}
-      </label>
+    <div
+      className={` ${
+        props.hideError ? "h-10 w-60" : "h-28 gap-2  w-full"
+      } px-2 flex flex-col `}
+    >
+      {props.label && (
+        <label className="text-sm text-left font-poppins block mb-1 text-[#1976d2] font-bold dark:font-light dark:text-white">
+          {props.label} {props.required && "*"}
+        </label>
+      )}
       <input
         type={props.type}
         placeholder={props.placeholder}
-        className={`w-full font-poppins px-4 py-3 border-2 dark:border text-black dark:text-white ${
+        className={` w-full h-full font-poppins  ${
+          props.hideError ? "py-1 px-2" : "py-3 px-4"
+        } border-2 dark:border text-black dark:text-white ${
           props.error?.length
             ? "border-red-400"
             : "border-[#1976d2] dark:border-white/20"

@@ -4,7 +4,13 @@ import {
   FaListAlt,
   FaUserGraduate,
 } from "react-icons/fa";
-import { LuBuilding, LuShield, LuUserCog, LuUsers } from "react-icons/lu";
+import {
+  LuBuilding,
+  LuLock,
+  LuShield,
+  LuUserCog,
+  LuUsers,
+} from "react-icons/lu";
 import { MdDashboard } from "react-icons/md";
 
 const SidebarItems = [
