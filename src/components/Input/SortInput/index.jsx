@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { LuCheckCheck } from "react-icons/lu";
 
-const DropdownInput = (props) => {
+const SortInput = (props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownLabel, setDropdownLabel] = useState("");
   const [dropdownValue, setDropdownValue] = useState("");
@@ -38,24 +38,25 @@ const DropdownInput = (props) => {
   }, [props.options]);
   return (
     <div
-      className="h-28 w-full px-2 flex flex-col gap-2 relative"
+      className="h-16  w-full px-2 flex flex-col gap-1 relative"
       ref={dropdownRef}
     >
-      <label className="text-sm block mb-1 text-gray-300">
-        {props.label} {props.required && "*"}
-      </label>
-
+      {props.label && (
+        <label className="text-sm block text-[#1976d2] font-bold">
+          {props.label} {props.required && "*"}
+        </label>
+      )}
       {/* Dropdown Button */}
       <button
-        className={`w-full px-4 py-3 border relative ${
-          props?.error?.length ? "border-red-400" : "border-white/20"
+        className={`w-full h-full px-4 py-2 border-2 relative ${
+          props?.error?.length ? "border-red-400" : "border-[#1976d2]"
         } rounded-md text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6a5af9] bg-transparent ${
           props.disabled ? "cursor-not-allowed" : "cursor-pointer"
         } flex items-center justify-between`}
         disabled={props.disabled}
         onClick={handleDropDown}
       >
-        <p className="text-gray-400 truncate">
+        <p className="text-black truncate">
           {dropdownLabel ?? `Choose ${props.label}`}
         </p>
         <div className="text-gray-300">
@@ -65,22 +66,24 @@ const DropdownInput = (props) => {
 
       {/* Dropdown List */}
       {dropdownOpen && (
-        <div className="absolute top-22 left-0 w-full max-h-60 overflow-y-auto rounded-lg bg-gray-700 shadow-lg">
+        <div className="absolute top-18 left-0 w-full max-h-60 overflow-y-auto rounded-lg bg-gray-700 shadow-lg">
           {props.options.length > 0 ? (
             props.options.map((option, index) => (
               <button
                 key={index}
-                className="flex justify-center items-start flex-col w-full text-left px-4 py-2 text-white hover:bg-gray-600 cursor-pointer"
+                className={`flex justify-center items-start flex-col w-full text-left px-4 py-2 mb-1 text-white hover:bg-gray-600 cursor-pointer ${
+                  dropdownValue === option.value ? "bg-gray-600" : ""
+                }`}
                 disabled={props.disabled}
                 onClick={() => handleDropdownValue(option.label, option.value)}
               >
                 <div className="flex items-center gap-2 w-full">
                   {/* Reserve space for check icon */}
-                  <div className="w-4 flex justify-center">
+                  {/* <div className="w-4 flex justify-center">
                     {dropdownValue === option.value && (
                       <LuCheckCheck className="text-green-500" />
                     )}
-                  </div>
+                  </div> */}
 
                   {/* Label stays fixed/aligned */}
                   <span className="text-sm">{option.label}</span>
@@ -96,4 +99,4 @@ const DropdownInput = (props) => {
   );
 };
 
-export default DropdownInput;
+export default SortInput;

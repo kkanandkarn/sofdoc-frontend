@@ -1,7 +1,9 @@
 import authSchema from "./auth";
+import verifySchema from "./verify";
 
 const schemas = {
   ...authSchema,
+  ...verifySchema,
 };
 
 export const validate = (schemaName, data) => {

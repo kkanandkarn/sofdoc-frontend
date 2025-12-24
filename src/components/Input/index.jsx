@@ -8,6 +8,8 @@ import NumberInput from "./NumberInput";
 import PasswordInput from "./PasswordInput";
 import TextAreaInput from "./TextAreaInput";
 import TextInput from "./TextInput";
+import SearchInput from "./SearchInput";
+import SortInput from "./SortInput";
 
 const COMPONENT_MAP = {
   text: TextInput,
@@ -18,6 +20,8 @@ const COMPONENT_MAP = {
   checkbox: CheckBoxInput,
   dropdown: DropdownInput,
   document: DocumentInput,
+  search: SearchInput,
+  sort: SortInput,
 };
 
 const InputBox = (props) => {

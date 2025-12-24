@@ -1,15 +1,17 @@
 import React from "react";
 
-const TextInput = (props) => {
+const SearchInput = (props) => {
   return (
-    <div className="h-28 w-full px-2 flex flex-col gap-2">
-      <label className="text-sm text-left font-poppins block mb-1 text-[#1976d2] font-bold dark:font-light dark:text-white">
-        {props.label} {props.required && "*"}
-      </label>
+    <div className="h-16 w-full px-2 flex flex-col gap-1">
+      {props.label && (
+        <label className="text-sm text-left font-poppins block text-[#1976d2] font-bold dark:font-light dark:text-white">
+          {props.label} {props.required && "*"}
+        </label>
+      )}
       <input
         type={props.type}
         placeholder={props.placeholder}
-        className={`w-full font-poppins px-4 py-3 pr-12 border-2 text-black dark:text-white ${
+        className={`w-full h-full font-poppins px-4 py-1 pr-4 border-2 text-black dark:text-white ${
           props.error?.length
             ? "border-red-400"
             : "border-[#1976d2] dark:border-white/20"
@@ -24,11 +26,8 @@ const TextInput = (props) => {
         ref={props.ref}
         disabled={props.disabled}
       />
-      {props.error?.length > 0 && (
-        <p className="text-red-400 text-sm">{props.error}</p>
-      )}
     </div>
   );
 };
 
-export default TextInput;
+export default SearchInput;
