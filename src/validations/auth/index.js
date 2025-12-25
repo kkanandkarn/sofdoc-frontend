@@ -16,5 +16,22 @@ const authSchema = {
       "string.empty": "Password is required",
     }),
   }),
+  auth_register: Joi.object({
+    name: Joi.string().trim().required().messages({
+      "string.base": "Name should be a type of text",
+      "any.required": "Name is required",
+      "string.empty": "name is required",
+    }),
+    email: Joi.string().trim().required().messages({
+      "string.base": "Email should be a type of text",
+      "any.required": "Email is required",
+      "string.empty": "Email is required",
+    }),
+    username: Joi.string().trim().required().messages({
+      "string.base": "Username should be a type of text",
+      "any.required": "Username is required",
+      "string.empty": "Username is required",
+    }),
+  }),
 };
 export default authSchema;

@@ -2,7 +2,7 @@ import React from "react";
 
 const TextInput = (props) => {
   return (
-    <div className="h-28 w-full px-2 flex flex-col gap-2">
+    <div className="h-28 w-full flex flex-col gap-2">
       <label className="text-sm text-left font-poppins block mb-1 text-[#1976d2] font-bold dark:font-light dark:text-white">
         {props.label} {props.required && "*"}
       </label>

@@ -8,7 +8,9 @@ import { validate } from "../../validations";
 import { notifier } from "../../components/Notifier";
 import { useDispatch } from "react-redux";
 import { userLogin } from "./../../store/slices/Auth/AuthThunk";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaGoogle } from "react-icons/fa";
+import SignUpDropdownContainer from "../SignUpDropdownContainer";
 
 const LoginContainer = () => {
   const dispatch = useDispatch();
@@ -85,11 +87,26 @@ const LoginContainer = () => {
             placeholder={"Enter Your Password"}
             required={true}
           />
+
           <Button
             label={"Login"}
             iconPrfix={<LuLogIn size={20} />}
             onClick={handleSubmit}
+            additionalClass={"w-full"}
           />
+        </div>
+        <SignUpDropdownContainer />
+        <div className="w-1/2 flex items-center gap-4">
+          <div className="flex-1 border-b border-gray-400"></div>
+          <span className="text-gray-600 text-sm font-medium">OR</span>
+          <div className="flex-1 border-b border-gray-400"></div>
+        </div>
+
+        <div className="py-4 flex items-center justify-center w-full">
+          <button className="flex items-center justify-center gap-4 cursor-pointer rounded-full bg-gray-600 text-white px-4 py-2">
+            <FaGoogle />
+            Continue with Google
+          </button>
         </div>
       </div>
     </div>
