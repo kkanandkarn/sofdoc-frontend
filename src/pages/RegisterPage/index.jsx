@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
-import TenantRegisterContainer from "../../containers/TenantRegisterContainer";
-import RegisterHeaderContainer from "../../containers/RegisterHeaderContainer";
 import RegisterContainer from "../../containers/RegisterContainer";
-import { IoCloudUploadOutline } from "react-icons/io5";
+import TenantRegisterContainer from "../../containers/TenantRegisterContainer";
 
 const RegisterPage = () => {
   const { userType } = useParams();
@@ -29,11 +26,7 @@ const RegisterPage = () => {
     organisation: <TenantRegisterContainer />,
   };
   return (
-    <div className="relative h-screen overflow-y-auto custom-scrollbar bg-gray-50 py-4">
-      <div className="absolute top-2 right-2">
-        <RegisterHeaderContainer />
-      </div>
-
+    <div className="h-screen overflow-y-auto custom-scrollbar bg-gray-50">
       {userMap[userType]}
     </div>
   );

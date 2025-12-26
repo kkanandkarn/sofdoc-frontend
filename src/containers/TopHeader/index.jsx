@@ -3,7 +3,7 @@ import { IoCloudUploadOutline } from "react-icons/io5";
 
 const TopHeader = () => {
   return (
-    <div className="flex flex-col items-center mb-8">
+    <div className="flex flex-col items-center mb-4">
       <div className="flex items-center gap-3">
         <div className="flex items-center justify-center w-9 h-9 rounded-md bg-blue-600 text-white">
           <IoCloudUploadOutline size={18} />

@@ -20,7 +20,7 @@ const authSchema = {
     name: Joi.string().trim().required().messages({
       "string.base": "Name should be a type of text",
       "any.required": "Name is required",
-      "string.empty": "name is required",
+      "string.empty": "Name is required",
     }),
     email: Joi.string().trim().required().messages({
       "string.base": "Email should be a type of text",
