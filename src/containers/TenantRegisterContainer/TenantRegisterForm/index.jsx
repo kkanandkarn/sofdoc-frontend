@@ -66,9 +66,7 @@ const TenantRegisterForm = ({ tab, setTab }) => {
 
         <div className="py-4 px-10">
           <TopHeader />
-          <div className="flex items-center justify-center my-2">
-            <h1 className="text-primary font-semibold">Organisation Details</h1>
-          </div>
+
           <div className="w-full flex items-center justify-between">
             <div className="w-2/5">
               <TenantRegistrationLeftContainer

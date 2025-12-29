@@ -66,22 +66,24 @@ const DropdownInput = (props) => {
 
       {/* Dropdown List */}
       {dropdownOpen && (
-        <div className="absolute top-22 left-0 w-full max-h-60 overflow-y-auto rounded-lg bg-gray-700 shadow-lg">
+        <div className="absolute top-22 left-0 w-full max-h-44 overflow-y-auto rounded-lg bg-gray-700 shadow-lg">
           {props.options.length > 0 ? (
             props.options.map((option, index) => (
               <button
                 key={index}
-                className="flex justify-center items-start flex-col w-full text-left px-4 py-2 text-white hover:bg-gray-600 cursor-pointer"
+                className={`my-1 flex justify-center items-start flex-col w-full text-left px-4 py-2 text-white hover:bg-gray-600 cursor-pointer ${
+                  dropdownValue === option.value ? "bg-gray-600" : ""
+                }`}
                 disabled={props.disabled}
                 onClick={() => handleDropdownValue(option.label, option.value)}
               >
                 <div className="flex items-center gap-2 w-full">
                   {/* Reserve space for check icon */}
-                  <div className="w-4 flex justify-center">
+                  {/* <div className="w-4 flex justify-center">
                     {dropdownValue === option.value && (
                       <LuCheckCheck className="text-green-500" />
                     )}
-                  </div>
+                  </div> */}
 
                   {/* Label stays fixed/aligned */}
                   <span className="text-sm">{option.label}</span>
