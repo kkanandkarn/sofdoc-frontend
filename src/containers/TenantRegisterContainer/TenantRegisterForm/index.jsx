@@ -3,6 +3,7 @@ import { validate } from "../../../validations";
 import RegisterHeaderContainer from "../../RegisterHeaderContainer";
 import TopHeader from "../../TopHeader";
 import TenantRegistrationLeftContainer from "../TenantRegistrationLeftContainer";
+import TenantRegistrationRightContainer from "../TenantRegistrationRightContainer";
 
 const TenantRegisterForm = ({ tab, setTab }) => {
   const [state, setState] = useState({
@@ -38,6 +39,14 @@ const TenantRegisterForm = ({ tab, setTab }) => {
     setState((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: "" }));
   };
+  const handleOrganisationTypeChange = (value) => {
+    setState((prev) => ({ ...prev, organisationType: value }));
+    setErrors((prev) => ({ ...prev, organisationType: "" }));
+  };
+  const handleIndustryChange = (value) => {
+    setState((prev) => ({ ...prev, industry: value }));
+    setErrors((prev) => ({ ...prev, industry: "" }));
+  };
   const handleSubmit = async () => {
     // const validationErrors = validate("auth_register", state);
     // if (validationErrors) {
@@ -60,10 +69,23 @@ const TenantRegisterForm = ({ tab, setTab }) => {
           <div className="flex items-center justify-center my-2">
             <h1 className="text-primary font-semibold">Organisation Details</h1>
           </div>
-          <TenantRegistrationLeftContainer
-            orgFileData={orgFileData}
-            setOrgFileData={setOrgFileData}
-          />
+          <div className="w-full flex items-center justify-between">
+            <div className="w-2/5">
+              <TenantRegistrationLeftContainer
+                orgFileData={orgFileData}
+                setOrgFileData={setOrgFileData}
+              />
+            </div>
+            <div className="w-3/5 flex items-center justify-center">
+              <TenantRegistrationRightContainer
+                state={state}
+                errors={errors}
+                handleChange={handleChange}
+                handleIndustryChange={handleIndustryChange}
+                handleOrganisationTypeChange={handleOrganisationTypeChange}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>

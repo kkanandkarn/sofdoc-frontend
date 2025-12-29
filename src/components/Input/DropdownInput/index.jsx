@@ -33,32 +33,33 @@ const DropdownInput = (props) => {
   useEffect(() => {
     if (props.options.length) {
       let findLabel = props.options.find((v) => v.value === props.value);
-      setDropdownLabel(findLabel ? findLabel.label : `Choose ${props.label}`);
+      setDropdownLabel(findLabel ? findLabel.label : null);
     }
   }, [props.options]);
   return (
-    <div
-      className="h-28 w-full px-2 flex flex-col gap-2 relative"
-      ref={dropdownRef}
-    >
-      <label className="text-sm block mb-1 text-gray-300">
+    <div className="h-28 w-full flex flex-col gap-2 relative" ref={dropdownRef}>
+      <label className="text-sm block mb-1 text-primary font-bold">
         {props.label} {props.required && "*"}
       </label>
 
       {/* Dropdown Button */}
       <button
-        className={`w-full px-4 py-3 border relative ${
-          props?.error?.length ? "border-red-400" : "border-white/20"
-        } rounded-md text-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#6a5af9] bg-transparent ${
+        className={`w-full px-4 py-3 border-2 relative ${
+          props?.error?.length ? "border-red-400" : "border-[#1976d2]"
+        } rounded-md text-sm placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#6a5af9]  bg-transparent ${
           props.disabled ? "cursor-not-allowed" : "cursor-pointer"
         } flex items-center justify-between`}
         disabled={props.disabled}
         onClick={handleDropDown}
       >
-        <p className="text-gray-400 truncate">
+        <p
+          className={`${
+            dropdownLabel ? "text-black" : "text-gray-500"
+          } truncate`}
+        >
           {dropdownLabel ?? `Choose ${props.label}`}
         </p>
-        <div className="text-gray-300">
+        <div className="text-gray-600">
           {dropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown size={15} />}
         </div>
       </button>

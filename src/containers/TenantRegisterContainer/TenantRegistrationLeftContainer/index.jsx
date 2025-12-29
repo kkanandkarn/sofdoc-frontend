@@ -37,7 +37,7 @@ const TenantRegistrationLeftContainer = ({ orgFileData, setOrgFileData }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center p-4 w-2/5 border-r border-gray-200">
+    <div className="flex flex-col justify-center items-center p-4 border-r border-gray-200">
       <div className="flex flex-col items-center justify-center w-full">
         <div className="relative mb-4">
           <div
