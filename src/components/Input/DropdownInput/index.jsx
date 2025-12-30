@@ -64,6 +64,10 @@ const DropdownInput = (props) => {
         </div>
       </button>
 
+      {props.error?.length > 0 && (
+        <p className="text-red-400 text-sm">{props.error}</p>
+      )}
+
       {/* Dropdown List */}
       {dropdownOpen && (
         <div className="absolute top-22 left-0 w-full max-h-44 overflow-y-auto rounded-lg bg-gray-700 shadow-lg">
@@ -78,14 +82,6 @@ const DropdownInput = (props) => {
                 onClick={() => handleDropdownValue(option.label, option.value)}
               >
                 <div className="flex items-center gap-2 w-full">
-                  {/* Reserve space for check icon */}
-                  {/* <div className="w-4 flex justify-center">
-                    {dropdownValue === option.value && (
-                      <LuCheckCheck className="text-green-500" />
-                    )}
-                  </div> */}
-
-                  {/* Label stays fixed/aligned */}
                   <span className="text-sm">{option.label}</span>
                 </div>
               </button>

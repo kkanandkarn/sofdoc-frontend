@@ -33,5 +33,33 @@ const authSchema = {
       "string.empty": "Username is required",
     }),
   }),
+  auth_tenant_register_org: Joi.object({
+    organisationName: Joi.string().trim().required().messages({
+      "any.required": "Organisation name is required",
+      "string.empty": "Organisation name is required",
+    }),
+    organisationType: Joi.string().trim().required().messages({
+      "any.required": "Organisation type is required",
+      "string.empty": "Organisation type is required",
+    }),
+    industry: Joi.string().trim().required().messages({
+      "any.required": "Industry is required",
+      "string.empty": "Industry is required",
+    }),
+  }),
+  auth_tenant_register_user: Joi.object({
+    name: Joi.string().trim().required().messages({
+      "any.required": "Name is required",
+      "string.empty": "Name is required",
+    }),
+    email: Joi.string().trim().required().messages({
+      "any.required": "Email is required",
+      "string.empty": "Email is required",
+    }),
+    username: Joi.string().trim().required().messages({
+      "any.required": "Username is required",
+      "string.empty": "Username is required",
+    }),
+  }),
 };
 export default authSchema;

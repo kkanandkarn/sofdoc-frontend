@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import loginBanner from "../../assets/login-banner.png";
 import { CiLock } from "react-icons/ci";
 import InputBox from "../../components/Input";
-import Button from "./../../components/Button";
+import Button from "../../components/Button";
 import { LuLogIn } from "react-icons/lu";
 import { validate } from "../../validations";
 import { notifier } from "../../components/Notifier";

@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { validate } from "../../../validations";
 import RegisterHeaderContainer from "../../RegisterHeaderContainer";
 import TopHeader from "../../TopHeader";
-import TenantRegistrationLeftContainer from "../TenantRegistrationLeftContainer";
-import TenantRegistrationRightContainer from "../TenantRegistrationRightContainer";
+import { useNavigate } from "react-router-dom";
+import TenantDetailsContainer from "../TenantDetailsContainer";
+import TenantUserRegistrationContainer from "../TenantUserRegistrationContainer";
+import { notifier } from "../../../components/Notifier";
+import TenantRegisterSuccess from "../TenantRegisterSuccess";
 
-const TenantRegisterForm = ({ tab, setTab }) => {
+const TenantRegisterForm = () => {
+  const [tab, setTab] = useState("TENANT_REGISTER");
   const [state, setState] = useState({
     organisationName: "",
     organisationType: "",
@@ -28,7 +31,7 @@ const TenantRegisterForm = ({ tab, setTab }) => {
     imageMsg: "Upload Profile Picture",
     imageError: false,
   });
-  const [fileData, setFileData] = useState({
+  const [userFileData, setUserFileData] = useState({
     selectedFile: null,
     filePreview: null,
     imageMsg: "Upload Profile Picture",
@@ -48,11 +51,38 @@ const TenantRegisterForm = ({ tab, setTab }) => {
     setErrors((prev) => ({ ...prev, industry: "" }));
   };
   const handleSubmit = async () => {
-    // const validationErrors = validate("auth_register", state);
-    // if (validationErrors) {
-    //   setErrors(validationErrors);
-    //   return;
-    // }
+    setTab("TENANT_REGISTER_SUCCESS");
+  };
+
+  const navigate = useNavigate();
+
+  const tabMap = {
+    TENANT_REGISTER: (
+      <TenantDetailsContainer
+        orgFileData={orgFileData}
+        setOrgFileData={setOrgFileData}
+        state={state}
+        errors={errors}
+        setErrors={setErrors}
+        handleChange={handleChange}
+        handleIndustryChange={handleIndustryChange}
+        handleOrganisationTypeChange={handleOrganisationTypeChange}
+        setTab={setTab}
+      />
+    ),
+    TENANT_USER_REGISTER: (
+      <TenantUserRegistrationContainer
+        userFileData={userFileData}
+        setUserFileData={setUserFileData}
+        errors={errors}
+        setErrors={setErrors}
+        handleChange={handleChange}
+        state={state}
+        setTab={setTab}
+        handleSubmit={handleSubmit}
+      />
+    ),
+    TENANT_REGISTER_SUCCESS: <TenantRegisterSuccess />,
   };
 
   return (
@@ -67,21 +97,19 @@ const TenantRegisterForm = ({ tab, setTab }) => {
         <div className="py-4 px-10">
           <TopHeader />
 
-          <div className="w-full flex items-center justify-between">
-            <div className="w-2/5">
-              <TenantRegistrationLeftContainer
-                orgFileData={orgFileData}
-                setOrgFileData={setOrgFileData}
-              />
-            </div>
-            <div className="w-3/5 flex items-center justify-center">
-              <TenantRegistrationRightContainer
-                state={state}
-                errors={errors}
-                handleChange={handleChange}
-                handleIndustryChange={handleIndustryChange}
-                handleOrganisationTypeChange={handleOrganisationTypeChange}
-              />
+          <div className="w-full flex flex-col items-start justify-center">
+            {tabMap[tab]}
+            <div className="flex items-center justify-end w-full py-4 border-t border-gray-100">
+              <p className="text-gray-600 text-sm">
+                Already have an account?{" "}
+                <button
+                  type="button"
+                  onClick={() => navigate("/")}
+                  className="text-blue-600 hover:text-blue-700 cursor-pointer font-semibold transition-colors hover:underline"
+                >
+                  Sign In
+                </button>
+              </p>
             </div>
           </div>
         </div>
