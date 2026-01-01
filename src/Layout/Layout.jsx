@@ -19,13 +19,13 @@ const Layout = ({ children, title = "SofDoc" }) => {
       <Helmet>
         <title>{title}</title>
       </Helmet>
-      <div className="h-screen flex gap-2 bg-gray-100 p-4">
+      <div className="h-screen flex bg-white">
         <ToastContainer position="top-center" />
-        <div className=" h-full">
+        <div className="h-full">
           <Sidebar />
         </div>
         <div className="flex-1 flex flex-col overflow-hidden">
-          <div className="h-14 px-6 w-full flex justify-between items-center bg-white rounded-lg">
+          <div className="h-14 px-6 w-full flex justify-between items-center bg-white border-b border-gray-200 p-4">
             <div className="">
               <div className="font-Poppins font-bold font-poppins text-sm text-gray-500 py-4">
                 Home {"/"} {title}
@@ -64,7 +64,7 @@ const Layout = ({ children, title = "SofDoc" }) => {
               )} */}
             </div>
           </div>
-          <div className="content-container overflow-auto h-full py-2">
+          <div className="content-container overflow-auto h-full p-4">
             {children}
           </div>
         </div>

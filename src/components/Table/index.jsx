@@ -5,17 +5,15 @@ import Pagination from "../Pagination";
 const Table = ({
   columns = [],
   rows = [],
-  pageSize = 10,
   total = 0,
   onPageChange,
+  currentPage,
 }) => {
-  const pageCount = Math.ceil(total / pageSize);
-
   return (
     <div className="bg-white w-full rounded-lg overflow-hidden">
       {/* Table */}
       <table className="w-full border-collapse">
-        <thead className="bg-gray-300">
+        <thead className="bg-gray-100">
           <tr>
             {columns.map((col) => (
               <th
@@ -39,9 +37,9 @@ const Table = ({
               </td>
             </tr>
           ) : (
-            rows.map((row) => (
+            rows.map((row, index) => (
               <tr
-                key={row.id} // ✅ use product id
+                key={index} // ✅ use product id
                 className="bg-white border-b border-gray-300"
               >
                 {columns.map((col) => {
@@ -63,15 +61,14 @@ const Table = ({
       </table>
 
       {/* Footer */}
-      <div className="flex items-center justify-between px-4 py-2 bg-gray-300">
+      <div className="flex items-center justify-between px-4 py-1">
         <p className="text-sm text-slate-600">
-          Showing {rows.length} of {total} products
+          Showing {rows.length} of {total}
         </p>
 
         <Pagination
-          currentPage={1}
-          total={total}
-          pageSize={pageSize}
+          currentPage={currentPage}
+          totalItems={80}
           onPageChange={onPageChange}
         />
       </div>

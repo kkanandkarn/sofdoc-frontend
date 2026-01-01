@@ -2,7 +2,6 @@ import LoadingOverlay from "react-loading-overlay-ts";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 const Loader = ({ active, children, loadingMessage }) => {
-  console.log("LOAING ACTIVE");
   return (
     <LoadingOverlay
       active={active}

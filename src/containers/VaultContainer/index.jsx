@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "../../components/Table";
+import { MdDeleteOutline, MdEdit } from "react-icons/md";
+import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import VaultHeader from "./VaultHeader";
 
 const VaultContainer = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const onPageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
   const apiProducts = [
     {
       id: 1,
@@ -10,7 +16,7 @@ const VaultContainer = () => {
       spaceUsed: "0.8",
       totalSpace: "1",
       collaborators: "4",
-      projectId: "proj_e4nuy6",
+      files: "154",
       status: "ACTIVE",
     },
     {
@@ -19,14 +25,14 @@ const VaultContainer = () => {
       spaceUsed: "0.4",
       totalSpace: "1",
       collaborators: "2",
-      projectId: "proj_p5876ej",
+      files: "32",
       status: "ACTIVE",
     },
   ];
 
   const mapProductsToRows = (vaults) =>
     vaults.map((vault, index) => ({
-      id: vault.id, // 👈 preserve product id here
+      id: vault.id,
       cells: [
         {
           key: "sno",
@@ -45,15 +51,15 @@ const VaultContainer = () => {
           data: vault.collaborators,
         },
         {
-          key: "projectId",
-          data: vault.projectId,
+          key: "files",
+          data: vault.files,
         },
 
         {
           key: "status",
           data: (
             <span
-              className={`px-2 py-1 text-xs rounded ${
+              className={`px-2 py-1 text-xs rounded-full ${
                 vault.status === "ACTIVE"
                   ? "bg-green-100 text-green-700"
                   : "bg-yellow-100 text-yellow-700"
@@ -67,17 +73,11 @@ const VaultContainer = () => {
           key: "actions",
           data: (
             <div className="flex gap-2">
-              <button
-                //   onClick={() => handleEdit(product.id)}
-                className="px-2 py-1 text-xs bg-gray-200 rounded"
-              >
-                Edit
+              <button className="p-2 bg-sky-500 text-white rounded-full cursor-pointer">
+                <FiEdit2 size={12} />
               </button>
-              <button
-                //   onClick={() => handleDelete(product.id)}
-                className="px-2 py-1 text-xs bg-red-100 text-red-600 rounded"
-              >
-                Delete
+              <button className="p-2 bg-sky-500 text-white rounded-full cursor-pointer">
+                <FiTrash2 size={12} />
               </button>
             </div>
           ),
@@ -90,7 +90,7 @@ const VaultContainer = () => {
     { key: "vaultName", label: "Project Name" },
     { key: "size", label: "Size" },
     { key: "collaborators", label: "Collaborators" },
-    { key: "projectId", label: "Project Id" },
+    { key: "files", label: "Files" },
     { key: "status", label: "Status" },
     { key: "actions", label: "Actions" },
   ];
@@ -103,12 +103,9 @@ const VaultContainer = () => {
       <Table
         columns={columns}
         rows={rows}
-        pageSize={10}
-        total={150}
-        onPageChange={(page) => {
-          // fetch data for this page
-          console.log("Page:", page);
-        }}
+        currentPage={currentPage}
+        onPageChange={onPageChange}
+        total={250}
       />
     </div>
   );
