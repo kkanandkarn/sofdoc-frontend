@@ -35,10 +35,10 @@ const DropdownInput = (props) => {
       let findLabel = props.options.find((v) => v.value === props.value);
       setDropdownLabel(findLabel ? findLabel.label : null);
     }
-  }, [props.options]);
+  }, [props.options, props.value]);
   return (
     <div className="h-28 w-full flex flex-col gap-2 relative" ref={dropdownRef}>
-      <label className="text-sm block mb-1 text-primary font-bold">
+      <label className="text-sm text-left font-poppins block mb-1 text-[#1976d2] font-bold dark:font-light dark:text-white">
         {props.label} {props.required && "*"}
       </label>
 
@@ -70,7 +70,7 @@ const DropdownInput = (props) => {
 
       {/* Dropdown List */}
       {dropdownOpen && (
-        <div className="absolute top-22 left-0 w-full max-h-44 overflow-y-auto rounded-lg bg-gray-700 shadow-lg">
+        <div className="absolute top-22 left-0 w-full max-h-44 overflow-y-auto rounded-lg bg-gray-700 shadow-lg z-10">
           {props.options.length > 0 ? (
             props.options.map((option, index) => (
               <button
