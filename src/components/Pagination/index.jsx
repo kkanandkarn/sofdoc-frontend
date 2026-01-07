@@ -43,7 +43,7 @@ const Pagination = ({ currentPage, totalItems, onPageChange }) => {
       <button
         onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-2 text-gray-600 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+        className="p-2 text-gray-600 cursor-pointer disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
       >
         <FiChevronLeft size={24} />
       </button>
@@ -77,7 +77,7 @@ const Pagination = ({ currentPage, totalItems, onPageChange }) => {
           currentPage < totalPages && onPageChange(currentPage + 1)
         }
         disabled={currentPage === totalPages}
-        className="p-2 text-gray-600 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
+        className="p-2 text-gray-600 cursor-pointer disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
       >
         <FiChevronRight size={24} />
       </button>

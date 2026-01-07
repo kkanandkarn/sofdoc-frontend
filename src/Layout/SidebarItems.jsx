@@ -21,12 +21,5 @@ const SidebarItems = [
     permission: "VIEW-VAULT",
     icon: <LuLock />,
   },
-  {
-    label: "Collaborators",
-    parent: "COLLABORATORS",
-    route: "/collaborators",
-    permission: "VIEW-COLLABORATORS",
-    icon: <LuUsers />,
-  },
 ];
 export default SidebarItems;

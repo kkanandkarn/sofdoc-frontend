@@ -3,32 +3,16 @@ import Table from "../../components/Table";
 import { MdDeleteOutline, MdEdit } from "react-icons/md";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
 import VaultHeader from "./VaultHeader";
+import { LuEye } from "react-icons/lu";
+import { FaEye } from "react-icons/fa";
+import { vaultProjects } from "../../utils/constant";
+import { Link } from "react-router-dom";
 
 const VaultContainer = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const onPageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  const apiProducts = [
-    {
-      id: 1,
-      vaultName: "Xley",
-      spaceUsed: "0.8",
-      totalSpace: "1",
-      collaborators: "4",
-      files: "154",
-      status: "ACTIVE",
-    },
-    {
-      id: 1,
-      vaultName: "Xley-Whitelist",
-      spaceUsed: "0.4",
-      totalSpace: "1",
-      collaborators: "2",
-      files: "32",
-      status: "ACTIVE",
-    },
-  ];
 
   const mapProductsToRows = (vaults) =>
     vaults.map((vault, index) => ({
@@ -52,7 +36,7 @@ const VaultContainer = () => {
         },
         {
           key: "files",
-          data: vault.files,
+          data: vault.fileCount,
         },
 
         {
@@ -73,6 +57,12 @@ const VaultContainer = () => {
           key: "actions",
           data: (
             <div className="flex gap-2">
+              <Link
+                to={`/vault/${vault.id}/files`}
+                className="p-2 bg-sky-500 text-white rounded-full cursor-pointer"
+              >
+                <FaEye size={12} />
+              </Link>
               <button className="p-2 bg-sky-500 text-white rounded-full cursor-pointer">
                 <FiEdit2 size={12} />
               </button>
@@ -94,7 +84,7 @@ const VaultContainer = () => {
     { key: "status", label: "Status" },
     { key: "actions", label: "Actions" },
   ];
-  const rows = mapProductsToRows(apiProducts);
+  const rows = mapProductsToRows(vaultProjects);
 
   return (
     <div className="w-full flex flex-col gap-2">

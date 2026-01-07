@@ -5,10 +5,10 @@ import "./styles.css";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-const Layout = ({ children, title = "SofDoc" }) => {
+const Layout = ({ children, title = "SofDoc", path = [] }) => {
   const [profileModal, setProfileModal] = useState(false);
   const [notificationModal, setNotificationModal] = useState(false);
   const [notificationCount, setNotificationCount] = useState(0);
@@ -16,9 +16,6 @@ const Layout = ({ children, title = "SofDoc" }) => {
 
   return (
     <div>
-      <Helmet>
-        <title>{title}</title>
-      </Helmet>
       <div className="h-screen flex bg-white">
         <ToastContainer position="top-center" />
         <div className="h-full">
@@ -27,8 +24,34 @@ const Layout = ({ children, title = "SofDoc" }) => {
         <div className="flex-1 flex flex-col overflow-hidden">
           <div className="h-14 px-6 w-full flex justify-between items-center bg-white border-b border-gray-200 p-4">
             <div className="">
-              <div className="font-Poppins font-bold font-poppins text-sm text-gray-500 py-4">
+              {/* <div className="font-Poppins font-bold font-poppins text-sm text-gray-500 py-4">
                 Home {"/"} {title}
+              </div> */}
+              <div className="flex items-center text-sm text-gray-500 font-Poppins font-semibold">
+                {/* Home */}
+                <Link
+                  className="cursor-pointer hover:text-blue-600"
+                  to={"/vault"}
+                >
+                  Home
+                </Link>
+
+                {path?.map((item, index) => (
+                  <span key={index} className="flex items-center">
+                    <span className="mx-2">/</span>
+
+                    {item.route ? (
+                      <Link
+                        className="cursor-pointer hover:text-blue-600"
+                        to={item.route}
+                      >
+                        {item.label}
+                      </Link>
+                    ) : (
+                      <span className="text-gray-700">{item.label}</span>
+                    )}
+                  </span>
+                ))}
               </div>
             </div>
             <div className="flex relative">

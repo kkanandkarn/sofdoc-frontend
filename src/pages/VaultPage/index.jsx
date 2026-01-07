@@ -3,8 +3,9 @@ import Layout from "../../Layout/Layout";
 import VaultContainer from "../../containers/VaultContainer";
 
 const VaultPage = () => {
+  const path = [{ label: "Vault" }];
   return (
-    <Layout title="Vault">
+    <Layout title="Vault" path={path}>
       <div className="w-full">
         {" "}
         <VaultContainer />
