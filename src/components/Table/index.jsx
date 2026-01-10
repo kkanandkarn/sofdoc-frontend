@@ -10,7 +10,7 @@ const Table = ({
   currentPage,
 }) => {
   return (
-    <div className="bg-white w-full rounded-lg overflow-hidden">
+    <div className="bg-white w-full rounded-lg overflow-hidden min-h-96">
       {/* Table */}
       <table className="w-full border-collapse">
         <thead className="bg-gray-100">

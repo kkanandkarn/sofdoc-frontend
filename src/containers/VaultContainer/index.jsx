@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Table from "../../components/Table";
 import { MdDeleteOutline, MdEdit } from "react-icons/md";
 import { FiEdit2, FiTrash2 } from "react-icons/fi";
@@ -7,11 +7,40 @@ import { LuEye } from "react-icons/lu";
 import { FaEye } from "react-icons/fa";
 import { vaultProjects } from "../../utils/constant";
 import { Link } from "react-router-dom";
+import AddVaultModal from "../../Modals/Vault/AddVaultModal";
+import VaultInfoModal from "../../Modals/Vault/VaultInfoModal";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
+import {
+  PiDotsThreeOutlineFill,
+  PiDotsThreeOutlineVerticalFill,
+} from "react-icons/pi";
 
 const VaultContainer = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const onPageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+  const [modal, setModal] = useState("");
+  const [openMenuId, setOpenMenuId] = useState(null);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setOpenMenuId(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleMenuClick = (menuKey) => {
+    console.log("HANDLE CLICK");
+    console.log("MENU KEY: ", menuKey);
+    setOpenMenuId(null);
+
+    setModal(menuKey);
   };
 
   const mapProductsToRows = (vaults) =>
@@ -24,11 +53,18 @@ const VaultContainer = () => {
         },
         {
           key: "vaultName",
-          data: vault.vaultName,
+          data: (
+            <Link
+              to={`/vault/${vault.id}/files`}
+              className=" text-sky-500 cursor-pointer hover:underline"
+            >
+              {vault.vaultName}
+            </Link>
+          ),
         },
         {
-          key: "size",
-          data: `${vault.spaceUsed}/${vault.totalSpace} GB`,
+          key: "storage",
+          data: `${vault.storageUsed}/${vault.totalStorage} GB`,
         },
         {
           key: "collaborators",
@@ -56,29 +92,57 @@ const VaultContainer = () => {
         {
           key: "actions",
           data: (
-            <div className="flex gap-2">
-              <Link
-                to={`/vault/${vault.id}/files`}
-                className="p-2 bg-sky-500 text-white rounded-full cursor-pointer"
+            <div className="relative" ref={menuRef}>
+              <button
+                onClick={() =>
+                  setOpenMenuId(openMenuId === vault.id ? null : vault.id)
+                }
+                className="text-lg cursor-pointer"
               >
-                <FaEye size={12} />
-              </Link>
-              <button className="p-2 bg-sky-500 text-white rounded-full cursor-pointer">
-                <FiEdit2 size={12} />
+                <PiDotsThreeOutlineVerticalFill />
               </button>
-              <button className="p-2 bg-sky-500 text-white rounded-full cursor-pointer">
-                <FiTrash2 size={12} />
-              </button>
+
+              {openMenuId === vault.id && (
+                <ActionMenu vault={vault} onClose={() => setOpenMenuId(null)} />
+              )}
             </div>
           ),
         },
       ],
     }));
 
+  const ActionMenu = ({ vault, onClose }) => {
+    return (
+      <div
+        className="absolute top-6 right-0 bg-white shadow-lg border rounded-md z-50 w-44 gap-2 py-2"
+        onMouseDown={(e) => e.stopPropagation()}
+      >
+        <button
+          className="w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
+          onClick={() => {
+            console.log("INFO");
+            handleMenuClick("VAULT_INFO");
+          }}
+        >
+          Project Info
+        </button>
+
+        <button
+          className="w-full text-left px-4 py-2 hover:bg-gray-100 cursor-pointer"
+          onClick={() => {
+            handleMenuClick("PROJECT_ENVIRONMENT");
+          }}
+        >
+          Project Environment
+        </button>
+      </div>
+    );
+  };
+
   const columns = [
     { key: "sno", label: "S No." },
     { key: "vaultName", label: "Project Name" },
-    { key: "size", label: "Size" },
+    { key: "storage", label: "Storage" },
     { key: "collaborators", label: "Collaborators" },
     { key: "files", label: "Files" },
     { key: "status", label: "Status" },
@@ -87,8 +151,8 @@ const VaultContainer = () => {
   const rows = mapProductsToRows(vaultProjects);
 
   return (
-    <div className="w-full flex flex-col gap-2">
-      <VaultHeader />
+    <div className="min-h-96 h-full flex flex-col gap-2">
+      <VaultHeader setModal={setModal} />
 
       <Table
         columns={columns}
@@ -97,6 +161,8 @@ const VaultContainer = () => {
         onPageChange={onPageChange}
         total={250}
       />
+      {modal === "ADD_PROJECT" && <AddVaultModal setModal={setModal} />}
+      {modal === "VAULT_INFO" && <VaultInfoModal setModal={setModal} />}
     </div>
   );
 };

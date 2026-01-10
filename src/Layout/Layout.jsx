@@ -87,7 +87,7 @@ const Layout = ({ children, title = "SofDoc", path = [] }) => {
               )} */}
             </div>
           </div>
-          <div className="content-container overflow-auto h-full p-4">
+          <div className="content-container overflow-auto h-full px-6 py-4">
             {children}
           </div>
         </div>

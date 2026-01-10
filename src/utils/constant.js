@@ -3,14 +3,23 @@ export const vaultDetailsPath = [
   { label: "Vault Details" },
 ];
 
+export const STORAGE_TYPE_OPTIONS = [
+  { label: "UNLIMITED", value: "UNLIMITED" },
+  { label: "LIMITED", value: "LIMITED" },
+];
+export const projectInfoOptions = [
+  { label: "Project Info", value: "PROJECT_INFO" },
+  { label: "Project Environments", value: "PROJECT_ENVIRONMENTS" },
+];
+
 // Temp
 
 export const vaultProjects = [
   {
     id: 1,
-    vaultName: "Xley",
-    spaceUsed: "0.8",
-    totalSpace: "1",
+    vaultName: "SofDoc",
+    storageUsed: "0.8",
+    totalStorage: "1",
     collaborators: "4",
     fileCount: "154",
     status: "ACTIVE",
@@ -18,8 +27,8 @@ export const vaultProjects = [
   {
     id: 2,
     vaultName: "Xley-Whitelist",
-    spaceUsed: "0.4",
-    totalSpace: "1",
+    storageUsed: "0.4",
+    totalStorage: "1",
     collaborators: "2",
     fileCount: "32",
     status: "ACTIVE",
@@ -30,8 +39,8 @@ export const vaultFileDetails = {
   vaultData: {
     id: 1,
     name: "Xley",
-    spaceUsed: "0.8",
-    totalSpace: "1",
+    storageUsed: "0.8",
+    totalStorage: "1",
     collaborators: "4",
     fileCount: "154",
   },
@@ -140,3 +149,92 @@ export const vaultEnvironmentOptions = [
     label: "Development",
   },
 ];
+
+export const vaultCollaborators = {
+  vaultData: {
+    id: 1,
+    name: "Xley",
+    storageUsed: "0.8",
+    totalStorage: "1",
+    collaborators: "6",
+    fileCount: "154",
+  },
+  collaborators: {
+    1: [
+      {
+        id: 1,
+        name: "Production Server",
+        email: "prod@xley.com",
+        role: "SYSTEM",
+        storageAllocation: "UNLIMITED",
+        storageUsed: "0.8",
+        totalStorage: "unlimited",
+        fileCount: "154",
+        status: "ACTIVE",
+        lastAccessed: "2026-01-07T18:45:00Z",
+        createdAt: "2025-06-12T10:00:00Z",
+        isOwner: true,
+      },
+    ],
+    2: [
+      {
+        id: 2,
+        name: "Staging Server",
+        email: "staging@xley.com",
+        role: "SYSTEM",
+        storageAllocation: "LIMITED",
+        storageUsed: "0.5",
+        totalStorage: "1",
+        fileCount: "15",
+        status: "ACTIVE",
+        lastAccessed: "2026-01-06T14:20:00Z",
+        createdAt: "2025-07-01T09:30:00Z",
+        isOwner: true,
+      },
+    ],
+    3: [
+      {
+        id: 3,
+        name: "Anand Kumar Karn",
+        email: "anandsofzenix@gmail.com",
+        role: "ADMIN",
+        storageAllocation: "LIMITED",
+        storageUsed: "0.1",
+        totalStorage: "0.5",
+        fileCount: "26",
+        status: "ACTIVE",
+        lastAccessed: "2026-01-08T08:10:00Z",
+        createdAt: "2025-08-15T11:45:00Z",
+        isOwner: false,
+      },
+      {
+        id: 4,
+        name: "Guru Sharan Kumar Ram",
+        email: "gurushrarankumarram1@gmail.com",
+        role: "EDITOR",
+        storageAllocation: "LIMITED",
+        storageUsed: "0.05",
+        totalStorage: "0.3",
+        fileCount: "12",
+        status: "ACTIVE",
+        lastAccessed: "2026-01-07T16:40:00Z",
+        createdAt: "2025-09-02T10:15:00Z",
+        isOwner: false,
+      },
+      {
+        id: 5,
+        name: "Neha Verma",
+        email: "neha.verma@xley.com",
+        role: "VIEWER",
+        storageAllocation: "UNLIMITED",
+        storageUsed: "0.02",
+        totalStorage: "0.2",
+        fileCount: "6",
+        status: "INACTIVE",
+        lastAccessed: "2025-12-28T12:00:00Z",
+        createdAt: "2025-10-10T09:00:00Z",
+        isOwner: false,
+      },
+    ],
+  },
+};

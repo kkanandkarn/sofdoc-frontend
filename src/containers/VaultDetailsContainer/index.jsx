@@ -5,18 +5,22 @@ import {
 } from "../../utils/constant";
 import { useNavigate, useParams } from "react-router-dom";
 import FileDetailsContainer from "./FileDetailsContainer";
-import { FaEye, FaFileShield } from "react-icons/fa6";
-import { LuFiles, LuInfo, LuUsers } from "react-icons/lu";
+import { FaArrowLeft, FaEye, FaFileShield } from "react-icons/fa6";
+import { LuCirclePlus, LuFiles, LuInfo, LuUsers } from "react-icons/lu";
 import { Tooltip } from "react-tooltip";
 import { formatDateTime } from "../../utils/functions";
 import { FiTrash2 } from "react-icons/fi";
 import InputBox from "../../components/Input";
 import Dropdown from "../../components/Dropdown";
+import CollaboratorDetailsContainer from "./CollaboratorDetailsContainer";
+import AddEnvironmentModal from "../../Modals/Vault/AddEnvironmentModal";
+import VaultInfoModal from "../../Modals/Vault/VaultInfoModal";
 
 const VaultDetailsContainer = () => {
   const { vaultId, tab } = useParams();
   const [env, setEnv] = useState(1);
   const [dropdownWidth, setDropdownWidth] = useState("auto"); // state for width
+  const [modal, setModal] = useState("");
 
   const navigate = useNavigate();
 
@@ -46,61 +50,16 @@ const VaultDetailsContainer = () => {
     }
   }, []);
 
-  const mapFilesToRows = (files) =>
-    files?.length &&
-    files?.map((file, index) => ({
-      id: file.id,
-      cells: [
-        { key: "sno", data: index + 1 },
-        {
-          key: "originalFileName",
-          data: (
-            <a href={file.fileUrl} className={`text-[#1976d2]`} target="_blank">
-              {file.originalFileName}
-            </a>
-          ),
-        },
-        { key: "fileType", data: file.fileType },
-        { key: "sizeInMb", data: `${file.sizeInMb} Mb` },
-        { key: "uploadedBy", data: file.uploadedBy.name },
-        { key: "uploadedAt", data: formatDateTime(file.uploadedAt) },
-        {
-          key: "actions",
-          data: (
-            <div className="flex gap-2">
-              <a
-                href={file.fileUrl}
-                className={`p-2 bg-sky-500 text-white rounded-full cursor-pointer`}
-                target="_blank"
-              >
-                <FaEye size={12} />
-              </a>
-              <button className="p-2 bg-sky-500 text-white rounded-full cursor-pointer">
-                <FiTrash2 size={12} />
-              </button>
-            </div>
-          ),
-        },
-      ],
-    }));
-
-  const columns = [
-    { key: "sno", label: "S No." },
-    { key: "originalFileName", label: "Name" },
-    { key: "fileType", label: "File Type" },
-    { key: "sizeInMb", label: "Size" },
-    { key: "uploadedBy", label: "Uploaded By" },
-    { key: "uploadedAt", label: "Uploaded At" },
-    { key: "actions", label: "Actions" },
-  ];
-
-  const rows = mapFilesToRows(vaultFileDetails.files[env]);
-  console.log("DROPDOWN WIDTH: ", dropdownWidth);
-
   return (
     <div className="w-full px-4">
       <div className="flex justify-between items-center">
-        <div>
+        <div className="flex items-center justify-start gap-2">
+          <button
+            className="text-textPrimary border-textPrimary py-1 px-2 border rounded-lg cursor-pointer"
+            onClick={() => navigate("/vault")}
+          >
+            <FaArrowLeft />
+          </button>
           <h1 className="text-gray-600 font-semibold">Vault Details</h1>
         </div>
         <div className="flex justify-end items-center gap-2 w-1/2">
@@ -112,6 +71,14 @@ const VaultDetailsContainer = () => {
             />
           </div>
           {/* Shield Button */}
+          <button
+            data-tooltip-id="add-tooltip"
+            data-tooltip-content="Add Environment"
+            className={`text-lg text-[#1976d2] border-2 p-2 rounded-lg border-[#1976d2] cursor-pointer `}
+            onClick={() => setModal("ADD_ENVIRONMENT")}
+          >
+            <LuCirclePlus />
+          </button>
           <button
             data-tooltip-id="shield-tooltip"
             data-tooltip-content="Files"
@@ -144,12 +111,15 @@ const VaultDetailsContainer = () => {
             className={`text-lg text-[#1976d2] border-2 p-2 rounded-lg border-[#1976d2] cursor-pointer ${
               tab === "info" ? "bg-[#1976d2] text-white" : ""
             }`}
+            onClick={() => setModal("VAULT_INFO")}
           >
             <LuInfo />
           </button>
 
           {/* Tooltips */}
+          <Tooltip id="add-tooltip" place="top" />
           <Tooltip id="shield-tooltip" place="top" />
+
           <Tooltip id="users-tooltip" place="top" />
           <Tooltip id="info-tooltip" place="top" />
         </div>
@@ -157,10 +127,13 @@ const VaultDetailsContainer = () => {
 
       {/* vault details */}
       <div className="w-full">
-        {tab === "files" && (
-          <FileDetailsContainer columns={columns} rows={rows} />
-        )}
+        {tab === "files" && <FileDetailsContainer env={env} />}
+        {tab === "collaborators" && <CollaboratorDetailsContainer env={env} />}
       </div>
+      {modal === "ADD_ENVIRONMENT" && (
+        <AddEnvironmentModal setModal={setModal} />
+      )}
+      {modal === "VAULT_INFO" && <VaultInfoModal setModal={setModal} />}
     </div>
   );
 };

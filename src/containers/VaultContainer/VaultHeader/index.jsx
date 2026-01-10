@@ -4,7 +4,7 @@ import FilterButton from "../../../components/FilterButton";
 import Button from "../../../components/Button";
 import { LuCirclePlus } from "react-icons/lu";
 
-const VaultHeader = () => {
+const VaultHeader = ({ setModal }) => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [sortBy, setSortBy] = useState("");
@@ -69,20 +69,20 @@ const VaultHeader = () => {
     },
   ];
   return (
-    <div className="bg-white w-full rounded-lg p-4">
-      <div className="flex items-center justify-end">
+    <div className="bg-white w-full rounded-lg py-2 ">
+      <div className="flex items-center justify-between">
+        <div className="w-72 flex items-center justify-end">
+          <InputBox
+            type="search"
+            value={search}
+            name={"search"}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder={"Search"}
+            label={"Search"}
+          />
+        </div>
         <div className="w-3/5 flex items-center justify-end gap-2">
           {" "}
-          <div className="w-64 flex items-center justify-end">
-            <InputBox
-              type="search"
-              value={search}
-              name={"search"}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder={"Search"}
-              label={"Search"}
-            />
-          </div>
           <div>
             <FilterButton
               filterOptions={filterOptions}
@@ -93,6 +93,7 @@ const VaultHeader = () => {
           <div>
             <Button
               label={"Add Project"}
+              onClick={() => setModal("ADD_PROJECT")}
               iconPrfix={<LuCirclePlus size={20} />}
             />
           </div>
