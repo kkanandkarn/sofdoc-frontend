@@ -20,11 +20,11 @@ const Dropdown = ({ label, options, onChange }) => {
   }, []);
 
   return (
-    <div className="py-4  flex w-full items-center justify-start text-textPrimary relative">
+    <div className="py-4 flex w-full items-center justify-start text-textPrimary relative">
       <div className="relative inline-block text-left" ref={dropdownRef}>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center cursor-pointer gap-2 hover:underline focus:outline-none"
+          className="flex items-center cursor-pointer gap-2 hover:underline focus:outline-none px-2"
         >
           {label}
           <svg

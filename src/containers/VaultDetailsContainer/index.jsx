@@ -15,12 +15,15 @@ import Dropdown from "../../components/Dropdown";
 import CollaboratorDetailsContainer from "./CollaboratorDetailsContainer";
 import AddEnvironmentModal from "../../Modals/Vault/AddEnvironmentModal";
 import VaultInfoModal from "../../Modals/Vault/VaultInfoModal";
+import AddVaultModal from "../../Modals/Vault/AddVaultModal";
 
 const VaultDetailsContainer = () => {
   const { vaultId, tab } = useParams();
   const [env, setEnv] = useState(1);
   const [dropdownWidth, setDropdownWidth] = useState("auto"); // state for width
   const [modal, setModal] = useState("");
+  const [rowData, setRowData] = useState({});
+  const [mode, setMode] = useState("add");
 
   const navigate = useNavigate();
 
@@ -133,7 +136,16 @@ const VaultDetailsContainer = () => {
       {modal === "ADD_ENVIRONMENT" && (
         <AddEnvironmentModal setModal={setModal} />
       )}
-      {modal === "VAULT_INFO" && <VaultInfoModal setModal={setModal} />}
+      {modal === "VAULT_INFO" && (
+        <VaultInfoModal
+          setModal={setModal}
+          setMode={setMode}
+          setRowData={setRowData}
+        />
+      )}
+      {modal === "ADD_PROJECT" && (
+        <AddVaultModal data={rowData} setModal={setModal} mode={mode} />
+      )}
     </div>
   );
 };

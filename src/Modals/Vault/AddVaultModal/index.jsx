@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MakeModal from "./../../../components/MakeModal";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import InputBox from "../../../components/Input";
 import { STORAGE_TYPE_OPTIONS } from "../../../utils/constant";
 import { notifier } from "./../../../components/Notifier/index";
 import Button from "../../../components/Button";
+import { FaSave } from "react-icons/fa";
 
-const AddVaultModal = ({ setModal }) => {
+const AddVaultModal = ({ mode, data, setModal }) => {
   const [state, setState] = useState({
     projectName: "",
     storageAllocation: "UNLIMITED",
@@ -17,6 +18,11 @@ const AddVaultModal = ({ setModal }) => {
     storageAllocation: "",
     totalStorage: "",
   });
+  useEffect(() => {
+    if (mode === "edit" && data) {
+      setState(data);
+    }
+  }, [mode, data]);
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "totalStorage") {
@@ -70,7 +76,9 @@ const AddVaultModal = ({ setModal }) => {
           </button>
         </div>
         <div className="flex items-center justify-center bg-gradient-to-r from-blue-50 to-indigo-50 py-4">
-          <h1 className="text-gray-600 font-semibold ">Add project</h1>
+          <h1 className="text-gray-600 font-semibold ">
+            {mode === "edit" ? "Update Project" : "Add project"}
+          </h1>
         </div>
         <div className="p-4">
           <InputBox
@@ -139,7 +147,11 @@ const AddVaultModal = ({ setModal }) => {
               onClick={() => setModal("")}
               variant="secondry"
             />
-            <Button label={"Add Project"} onClick={handleSubmit} />
+            <Button
+              label={"Save"}
+              iconPrfix={<FaSave size={18} />}
+              onClick={handleSubmit}
+            />
           </div>
         </div>
       </div>

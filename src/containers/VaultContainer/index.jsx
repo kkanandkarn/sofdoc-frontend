@@ -14,9 +14,13 @@ import {
   PiDotsThreeOutlineFill,
   PiDotsThreeOutlineVerticalFill,
 } from "react-icons/pi";
+import EnvironmentModal from "../../Modals/Vault/EnvironmentModal";
 
 const VaultContainer = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [rowData, setRowData] = useState({});
+  const [mode, setMode] = useState("add");
   const onPageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -152,17 +156,35 @@ const VaultContainer = () => {
 
   return (
     <div className="min-h-96 h-full flex flex-col gap-2">
-      <VaultHeader setModal={setModal} />
+      <VaultHeader
+        setMode={setMode}
+        setRowData={setRowData}
+        setModal={setModal}
+      />
 
       <Table
+        selectedRows={selectedRows}
+        setSelectedRows={setSelectedRows}
         columns={columns}
         rows={rows}
         currentPage={currentPage}
         onPageChange={onPageChange}
         total={250}
+        tableName={"Vault Details"}
       />
-      {modal === "ADD_PROJECT" && <AddVaultModal setModal={setModal} />}
-      {modal === "VAULT_INFO" && <VaultInfoModal setModal={setModal} />}
+      {modal === "ADD_PROJECT" && (
+        <AddVaultModal data={rowData} setModal={setModal} mode={mode} />
+      )}
+      {modal === "VAULT_INFO" && (
+        <VaultInfoModal
+          setMode={setMode}
+          setRowData={setRowData}
+          setModal={setModal}
+        />
+      )}
+      {modal === "PROJECT_ENVIRONMENT" && (
+        <EnvironmentModal setModal={setModal} />
+      )}
     </div>
   );
 };

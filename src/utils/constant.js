@@ -12,6 +12,11 @@ export const projectInfoOptions = [
   { label: "Project Environments", value: "PROJECT_ENVIRONMENTS" },
 ];
 
+export const statusOptions = [
+  { label: "ACTIVE", value: "ACTIVE" },
+  { label: "HOLD", value: "HOLD" },
+];
+
 // Temp
 
 export const vaultProjects = [
@@ -238,3 +243,24 @@ export const vaultCollaborators = {
     ],
   },
 };
+
+export const environmentsTableData = [
+  {
+    id: 1,
+    name: "Production",
+    isPrimary: true,
+    status: "ACTIVE",
+  },
+  {
+    id: 2,
+    name: "Stage",
+    isPrimary: false,
+    status: "ACTIVE",
+  },
+  {
+    id: 3,
+    name: "Development",
+    isPrimary: false,
+    status: "ACTIVE",
+  },
+];

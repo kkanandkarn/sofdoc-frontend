@@ -4,9 +4,11 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { MdContentCopy } from "react-icons/md";
 import { notifier } from "../../../components/Notifier";
+import InputBox from "../../../components/Input";
+import { FiEdit2 } from "react-icons/fi";
 
-const VaultInfoModal = ({ setModal }) => {
-  const [vaultInfo, setVaultInfo] = useState({
+const VaultInfoModal = ({ setModal, setMode, setRowData }) => {
+  const [state, setState] = useState({
     vaultName: "Eduzenix",
     storageUsed: "0.8",
     totalStorage: "1",
@@ -15,7 +17,29 @@ const VaultInfoModal = ({ setModal }) => {
     projectKey: "EDU-7K9F2A",
     status: "ACTIVE",
   });
-  const [tab, setTab] = useState("PROJECT_INFO");
+  const [errors, setErrors] = useState({
+    vaultName: "",
+    storageUsed: "",
+    totalStorage: "",
+    collaborators: "",
+    fileCount: "",
+    projectKey: "",
+    status: "",
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setState((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }));
+  };
+
   const [hidden, setHidden] = useState(true);
   const handleCopy = async (text) => {
     try {
@@ -26,10 +50,29 @@ const VaultInfoModal = ({ setModal }) => {
     }
   };
 
+  const handleEdit = () => {
+    setModal("ADD_PROJECT");
+  };
+
   return (
     <MakeModal>
       <div className="min-w-[50%]  min-h-[50%] rounded-lg shadow-lg flex flex-col bg-white overflow-y-auto relative">
-        <div className="absolute top-3 right-8">
+        <div className="absolute top-3 right-8 flex items-center justify-end gap-2">
+          <button
+            className="p-2 text-xs bg-sky-500 text-white rounded-full cursor-pointer"
+            onClick={() => {
+              setRowData({
+                projectName: "SofDoc",
+                storageAllocation: "UNLIMITED",
+                totalStorage: "",
+              });
+              setMode("edit");
+              setModal("ADD_PROJECT");
+            }}
+          >
+            {" "}
+            <FiEdit2 />
+          </button>
           <button
             onClick={() => {
               setModal("");
@@ -47,33 +90,34 @@ const VaultInfoModal = ({ setModal }) => {
           <div className="grid grid-cols-3 gap-8 ">
             <div className="flex flex-col items-start justify-center gap-1">
               <h1 className="font-semibold text-textPrimary">Project Name</h1>
-              <p className="text-gray-700">{vaultInfo?.vaultName}</p>
+              <p className="text-gray-700">{state?.vaultName}</p>
             </div>
             <div className="flex flex-col items-start justify-center gap-1">
               <h1 className="font-semibold text-textPrimary">Storage Used</h1>
-              <p className="text-gray-700">{vaultInfo?.storageUsed} GB</p>
+              <p className="text-gray-700">{state?.storageUsed} GB</p>
             </div>
             <div className="flex flex-col items-start justify-center gap-1">
               <h1 className="font-semibold text-textPrimary">Total Storage</h1>
-              <p className="text-gray-700">{vaultInfo?.totalStorage} GB</p>
+              <p className="text-gray-700">{state?.totalStorage} GB</p>
             </div>
             <div className="flex flex-col items-start justify-center gap-1">
               <h1 className="font-semibold text-textPrimary">Collaborators</h1>
-              <p className="text-gray-700">{vaultInfo?.collaborators} GB</p>
+              <p className="text-gray-700">{state?.collaborators} GB</p>
             </div>
             <div className="flex flex-col items-start justify-center gap-1">
               <h1 className="font-semibold text-textPrimary">Files</h1>
-              <p className="text-gray-700">{vaultInfo?.fileCount}</p>
+              <p className="text-gray-700">{state?.fileCount}</p>
             </div>
             <div className="flex flex-col items-start justify-center gap-1">
               <h1 className="font-semibold text-textPrimary">Status</h1>
-              <p className="text-gray-700">{vaultInfo?.status}</p>
+              <p className="text-gray-700">{state?.status}</p>
             </div>
+
             <div className="flex flex-col items-start justify-center gap-1">
               <h1 className="font-semibold text-textPrimary">Project key</h1>
               <div className="flex items-center justify-center gap-2">
                 <p className="text-gray-700">
-                  {hidden ? "XXXXXXXXXX" : vaultInfo?.projectKey}
+                  {hidden ? "XXXXXXXXXX" : state?.projectKey}
                 </p>
                 <button
                   className="text-textPrimary text-xl cursor-pointer"
@@ -83,7 +127,7 @@ const VaultInfoModal = ({ setModal }) => {
                 </button>
                 <button
                   className="text-textPrimary text-lg cursor-pointer"
-                  onClick={() => handleCopy(vaultInfo.projectKey)}
+                  onClick={() => handleCopy(state.projectKey)}
                 >
                   <MdContentCopy />
                 </button>

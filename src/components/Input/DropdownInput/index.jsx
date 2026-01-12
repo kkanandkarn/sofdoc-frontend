@@ -37,10 +37,17 @@ const DropdownInput = (props) => {
     }
   }, [props.options, props.value]);
   return (
-    <div className="h-28 w-full flex flex-col gap-2 relative" ref={dropdownRef}>
-      <label className="text-sm text-left font-poppins block mb-1 text-[#1976d2] font-bold dark:font-light dark:text-white">
-        {props.label} {props.required && "*"}
-      </label>
+    <div
+      className={`${
+        props.label ? "h-28" : "h-18"
+      } w-full flex flex-col items-center justify-center gap-2 relative`}
+      ref={dropdownRef}
+    >
+      {props.label && (
+        <label className="text-sm text-left font-poppins block mb-1 text-[#1976d2] font-bold dark:font-light dark:text-white">
+          {props.label} {props.required && "*"}
+        </label>
+      )}
 
       {/* Dropdown Button */}
       <button
@@ -70,7 +77,11 @@ const DropdownInput = (props) => {
 
       {/* Dropdown List */}
       {dropdownOpen && (
-        <div className="absolute top-22 left-0 w-full max-h-44 overflow-y-auto rounded-lg bg-gray-700 shadow-lg z-10">
+        <div
+          className={`${
+            props.label ? "top-22" : "top-18"
+          } absolute  left-0 w-full max-h-44 overflow-y-auto rounded-lg bg-gray-700 shadow-lg z-10`}
+        >
           {props.options.length > 0 ? (
             props.options.map((option, index) => (
               <button

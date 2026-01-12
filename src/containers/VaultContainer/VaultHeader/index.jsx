@@ -4,7 +4,7 @@ import FilterButton from "../../../components/FilterButton";
 import Button from "../../../components/Button";
 import { LuCirclePlus } from "react-icons/lu";
 
-const VaultHeader = ({ setModal }) => {
+const VaultHeader = ({ setMode, setRowData, setModal }) => {
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [sortBy, setSortBy] = useState("");
@@ -93,7 +93,11 @@ const VaultHeader = ({ setModal }) => {
           <div>
             <Button
               label={"Add Project"}
-              onClick={() => setModal("ADD_PROJECT")}
+              onClick={() => {
+                setRowData({});
+                setMode("add");
+                setModal("ADD_PROJECT");
+              }}
               iconPrfix={<LuCirclePlus size={20} />}
             />
           </div>

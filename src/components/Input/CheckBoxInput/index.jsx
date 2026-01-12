@@ -3,13 +3,17 @@ import { GiCheckMark } from "react-icons/gi";
 import { LuCheck } from "react-icons/lu";
 
 const CheckBoxInput = (props) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(props.checked ?? false);
   const handleCheckboxValue = () => {
     setChecked(!checked);
     props.onChange(!checked);
   };
   return (
-    <div className="h-14 w-full px-2 flex flex-col gap-2">
+    <div
+      className={`${
+        props.label ? "h-14" : "max-h-5"
+      } w-full px-2 flex flex-col gap-2`}
+    >
       <div className="flex items-center justify-start gap-2">
         <button
           className={`h-6 w-6 rounded-md transition-colors duration-200
