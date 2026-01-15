@@ -79,7 +79,7 @@ const DropdownInput = (props) => {
       {dropdownOpen && (
         <div
           className={`${
-            props.label ? "top-22" : "top-18"
+            props.label ? "top-25" : "top-18"
           } absolute  left-0 w-full max-h-44 overflow-y-auto rounded-lg bg-gray-700 shadow-lg z-10`}
         >
           {props.options.length > 0 ? (

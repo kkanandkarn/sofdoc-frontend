@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   vaultEnvironmentOptions,
   vaultFileDetails,
@@ -6,7 +6,13 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import FileDetailsContainer from "./FileDetailsContainer";
 import { FaArrowLeft, FaEye, FaFileShield } from "react-icons/fa6";
-import { LuCirclePlus, LuFiles, LuInfo, LuUsers } from "react-icons/lu";
+import {
+  LuCirclePlus,
+  LuFiles,
+  LuInfo,
+  LuUpload,
+  LuUsers,
+} from "react-icons/lu";
 import { Tooltip } from "react-tooltip";
 import { formatDateTime } from "../../utils/functions";
 import { FiTrash2 } from "react-icons/fi";
@@ -16,6 +22,7 @@ import CollaboratorDetailsContainer from "./CollaboratorDetailsContainer";
 import AddEnvironmentModal from "../../Modals/Vault/AddEnvironmentModal";
 import VaultInfoModal from "../../Modals/Vault/VaultInfoModal";
 import AddVaultModal from "../../Modals/Vault/AddVaultModal";
+import { MdOutlineCloudUpload } from "react-icons/md";
 
 const VaultDetailsContainer = () => {
   const { vaultId, tab } = useParams();
@@ -24,8 +31,21 @@ const VaultDetailsContainer = () => {
   const [modal, setModal] = useState("");
   const [rowData, setRowData] = useState({});
   const [mode, setMode] = useState("add");
+  const fileInputRef = useRef(null);
 
   const navigate = useNavigate();
+
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
+  };
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    console.log("Selected file:", file);
+
+    // 👉 call API or store file in state
+  };
 
   const handleTabChange = (newTab) => {
     navigate(`/vault/${vaultId}/${newTab}`);
@@ -73,15 +93,35 @@ const VaultDetailsContainer = () => {
               options={vaultEnvironmentOptions}
             />
           </div>
+          <input
+            ref={fileInputRef}
+            type="file"
+            className="hidden"
+            onChange={handleFileChange}
+          />
+
           {/* Shield Button */}
-          <button
-            data-tooltip-id="add-tooltip"
-            data-tooltip-content="Add Environment"
-            className={`text-lg text-[#1976d2] border-2 p-2 rounded-lg border-[#1976d2] cursor-pointer `}
-            onClick={() => setModal("ADD_ENVIRONMENT")}
-          >
-            <LuCirclePlus />
-          </button>
+          {tab === "files" && (
+            <button
+              data-tooltip-id="upload-file"
+              data-tooltip-content="Upload File"
+              className={`text-lg text-[#1976d2] border-2 p-2 rounded-lg border-[#1976d2] cursor-pointer `}
+              onClick={handleButtonClick}
+            >
+              <LuUpload />
+            </button>
+          )}
+
+          {tab === "collaborators" && (
+            <button
+              data-tooltip-id="add-collaborator"
+              data-tooltip-content="Add Collaborator"
+              className={`text-lg text-[#1976d2] border-2 p-2 rounded-lg border-[#1976d2] cursor-pointer `}
+            >
+              <LuCirclePlus />
+            </button>
+          )}
+
           <button
             data-tooltip-id="shield-tooltip"
             data-tooltip-content="Files"
@@ -120,7 +160,8 @@ const VaultDetailsContainer = () => {
           </button>
 
           {/* Tooltips */}
-          <Tooltip id="add-tooltip" place="top" />
+          <Tooltip id="upload-file" place="top" />
+          <Tooltip id="add-collaborator" place="top" />
           <Tooltip id="shield-tooltip" place="top" />
 
           <Tooltip id="users-tooltip" place="top" />

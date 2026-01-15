@@ -1,22 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { teamsTableData } from "./../../../utils/constant";
+import { useParams } from "react-router-dom";
 import MakeModal from "../../../components/MakeModal";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import { LuEye, LuEyeOff } from "react-icons/lu";
-import { MdContentCopy } from "react-icons/md";
-import { notifier } from "../../../components/Notifier";
-import InputBox from "../../../components/Input";
 import { FiEdit2 } from "react-icons/fi";
+import { IoIosCloseCircleOutline } from "react-icons/io";
+import { MdContentCopy } from "react-icons/md";
+import { LuEye, LuEyeOff } from "react-icons/lu";
+import { notifier } from "../../../components/Notifier";
 
-const VaultInfoModal = ({ setModal, setMode, setRowData }) => {
+const TeamInfoModal = ({ userId, setModal, setMode, setRowData }) => {
   const [state, setState] = useState({
-    vaultName: "Eduzenix",
-    storageUsed: "0.8",
-    totalStorage: "1",
-    collaborators: "4",
-    fileCount: "154",
-    projectKey: "EDU-7K9F2A",
-    status: "ACTIVE",
+    id: null,
+    name: "",
+    username: "",
+    email: "",
+    role: "",
+    apiKey: "",
+    status: "",
   });
+
+  const teamsData = teamsTableData.find((d) => d.id === userId);
+  useEffect(() => {
+    setState(teamsData);
+  }, [teamsData]);
 
   const [hidden, setHidden] = useState(true);
   const handleCopy = async (text) => {
@@ -29,9 +35,8 @@ const VaultInfoModal = ({ setModal, setMode, setRowData }) => {
   };
 
   const handleEdit = () => {
-    setModal("ADD_PROJECT");
+    setModal("ADD_MEMBER");
   };
-
   return (
     <MakeModal>
       <div className="min-w-[50%]  min-h-[50%] rounded-lg shadow-lg flex flex-col bg-white overflow-y-auto relative">
@@ -39,13 +44,9 @@ const VaultInfoModal = ({ setModal, setMode, setRowData }) => {
           <button
             className="p-2 text-xs bg-sky-500 text-white rounded-full cursor-pointer"
             onClick={() => {
-              setRowData({
-                projectName: "SofDoc",
-                storageAllocation: "UNLIMITED",
-                totalStorage: "",
-              });
+              setRowData(state);
               setMode("edit");
-              setModal("ADD_PROJECT");
+              setModal("ADD_TEAM_MEMBER");
             }}
           >
             {" "}
@@ -61,41 +62,40 @@ const VaultInfoModal = ({ setModal, setMode, setRowData }) => {
           </button>
         </div>
         <div className="flex items-center justify-center bg-gradient-to-r from-blue-50 to-indigo-50 py-4">
-          <h1 className="text-gray-600 font-semibold ">Project Information</h1>
+          <h1 className="text-gray-600 font-semibold ">
+            Team Member Information
+          </h1>
         </div>
 
         <div className="px-8 py-4 w-full">
           <div className="grid grid-cols-3 gap-8 ">
             <div className="flex flex-col items-start justify-center gap-1">
-              <h1 className="font-semibold text-textPrimary">Project Name</h1>
-              <p className="text-gray-700">{state?.vaultName}</p>
+              <h1 className="font-semibold text-textPrimary">Name</h1>
+              <p className="text-gray-700">{state?.name}</p>
             </div>
             <div className="flex flex-col items-start justify-center gap-1">
-              <h1 className="font-semibold text-textPrimary">Storage Used</h1>
-              <p className="text-gray-700">{state?.storageUsed} GB</p>
+              <h1 className="font-semibold text-textPrimary">Username</h1>
+              <p className="text-gray-700">{state?.username}</p>
             </div>
             <div className="flex flex-col items-start justify-center gap-1">
-              <h1 className="font-semibold text-textPrimary">Total Storage</h1>
-              <p className="text-gray-700">{state?.totalStorage} GB</p>
+              <h1 className="font-semibold text-textPrimary">Email</h1>
+              <p className="text-gray-700">{state?.email}</p>
             </div>
             <div className="flex flex-col items-start justify-center gap-1">
-              <h1 className="font-semibold text-textPrimary">Collaborators</h1>
-              <p className="text-gray-700">{state?.collaborators} GB</p>
+              <h1 className="font-semibold text-textPrimary">Role</h1>
+              <p className="text-gray-700">{state?.role}</p>
             </div>
-            <div className="flex flex-col items-start justify-center gap-1">
-              <h1 className="font-semibold text-textPrimary">Files</h1>
-              <p className="text-gray-700">{state?.fileCount}</p>
-            </div>
+
             <div className="flex flex-col items-start justify-center gap-1">
               <h1 className="font-semibold text-textPrimary">Status</h1>
               <p className="text-gray-700">{state?.status}</p>
             </div>
 
             <div className="flex flex-col items-start justify-center gap-1">
-              <h1 className="font-semibold text-textPrimary">Project key</h1>
+              <h1 className="font-semibold text-textPrimary">API key</h1>
               <div className="flex items-center justify-center gap-2">
                 <p className="text-gray-700">
-                  {hidden ? "XXXXXXXXXX" : state?.projectKey}
+                  {hidden ? "XXXXXXXXXX" : state?.apiKey}
                 </p>
                 <button
                   className="text-textPrimary text-xl cursor-pointer"
@@ -105,7 +105,7 @@ const VaultInfoModal = ({ setModal, setMode, setRowData }) => {
                 </button>
                 <button
                   className="text-textPrimary text-lg cursor-pointer"
-                  onClick={() => handleCopy(state.projectKey)}
+                  onClick={() => handleCopy(state?.apiKey)}
                 >
                   <MdContentCopy />
                 </button>
@@ -118,4 +118,4 @@ const VaultInfoModal = ({ setModal, setMode, setRowData }) => {
   );
 };
 
-export default VaultInfoModal;
+export default TeamInfoModal;

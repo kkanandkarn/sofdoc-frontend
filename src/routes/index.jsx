@@ -8,6 +8,7 @@ const VerifyPage = lazy(() => import("../pages/VerifyPage"));
 const RegisterPage = lazy(() => import("../pages/RegisterPage"));
 const TenantRegister = lazy(() => import("../pages/TenantRegister"));
 const VaultDetails = lazy(() => import("../pages/VaultDetails"));
+const TeamsPage = lazy(() => import("../pages/TeamsPage"));
 
 const routes = [
   { path: "/", exact: true, component: LoginPage },
@@ -17,6 +18,7 @@ const routes = [
   { path: "/verify/:linkId", exact: true, component: VerifyPage },
   { path: "/register/:userType", exact: true, component: RegisterPage },
   { path: "/tenant", exact: true, component: TenantRegister },
+  { path: "/team", exact: true, component: TeamsPage },
 ];
 
 const PageRoutes = () => {

@@ -7,6 +7,7 @@ import { FiTrash2 } from "react-icons/fi";
 
 const FileDetailsContainer = ({ env }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedRows, setSelectedRows] = useState([]);
   const onPageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -69,6 +70,9 @@ const FileDetailsContainer = ({ env }) => {
         currentPage={currentPage}
         onPageChange={onPageChange}
         total={250}
+        tableName={"Files"}
+        selectedRows={selectedRows}
+        setSelectedRows={setSelectedRows}
       />
     </div>
   );

@@ -21,5 +21,12 @@ const SidebarItems = [
     permission: "VIEW-VAULT",
     icon: <LuLock />,
   },
+  {
+    label: "Team",
+    parent: "team",
+    route: "/team",
+    permission: "VIEW-TEAM",
+    icon: <LuLock />,
+  },
 ];
 export default SidebarItems;

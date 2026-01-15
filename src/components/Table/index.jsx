@@ -52,10 +52,10 @@ const Table = ({
   };
 
   return (
-    <div className="bg-white w-full rounded-lg overflow-hidden min-h-96">
+    <div className="bg-white w-full rounded-lg">
       {/* Header */}
       <div className="h-10 w-full border-t border-b border-gray-300 flex items-center justify-between px-4">
-        <div className="text-gray-600 text-sm font-semibold">{tableName}</div>
+        <div className="text-gray-500 text-base font-semibold">{tableName}</div>
 
         <button
           className="text-2xl cursor-pointer text-red-500 disabled:text-red-300 disabled:cursor-not-allowed"

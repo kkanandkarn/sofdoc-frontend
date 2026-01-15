@@ -1,5 +1,6 @@
 import React from "react";
 import RangeFilter from "./RangeFilter";
+import DropdownFilter from "./DropdownFilter";
 
 const Filter = ({ filterOptions, filterData, setFilterData }) => {
   return (
@@ -11,6 +12,13 @@ const Filter = ({ filterOptions, filterData, setFilterData }) => {
             {(filterObj.dataType === "range-input" ||
               filterObj.dataType === "range-dropdown") && (
               <RangeFilter
+                filterObj={filterObj}
+                filterData={filterData}
+                setFilterData={setFilterData}
+              />
+            )}
+            {filterObj.dataType === "dropdown" && (
+              <DropdownFilter
                 filterObj={filterObj}
                 filterData={filterData}
                 setFilterData={setFilterData}

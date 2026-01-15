@@ -21,7 +21,7 @@ const Layout = ({ children, title = "SofDoc", path = [] }) => {
         <div className="h-full">
           <Sidebar />
         </div>
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex flex-col overflow-hidden min-h-0">
           <div className="h-14 px-6 w-full flex justify-between items-center bg-white border-b border-gray-200 p-4">
             <div className="">
               {/* <div className="font-Poppins font-bold font-poppins text-sm text-gray-500 py-4">
@@ -87,7 +87,7 @@ const Layout = ({ children, title = "SofDoc", path = [] }) => {
               )} */}
             </div>
           </div>
-          <div className="content-container overflow-auto h-full px-6 py-4">
+          <div className="content-container flex-1 h-10 overflow-auto bg-white py-4 px-8">
             {children}
           </div>
         </div>

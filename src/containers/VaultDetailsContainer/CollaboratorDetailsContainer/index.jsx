@@ -97,6 +97,7 @@ const CollaboratorDetailsContainer = ({ env }) => {
         currentPage={currentPage}
         onPageChange={onPageChange}
         total={250}
+        tableName={"Collaborators"}
       />
     </div>
   );

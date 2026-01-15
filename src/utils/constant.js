@@ -2,6 +2,7 @@ export const vaultDetailsPath = [
   { label: "Vault", route: "/vault" },
   { label: "Vault Details" },
 ];
+export const teamsPath = [{ label: "Team" }];
 
 export const STORAGE_TYPE_OPTIONS = [
   { label: "UNLIMITED", value: "UNLIMITED" },
@@ -14,7 +15,13 @@ export const projectInfoOptions = [
 
 export const statusOptions = [
   { label: "ACTIVE", value: "ACTIVE" },
+  { label: "INVITE SENT", value: "INVITE SENT" },
   { label: "HOLD", value: "HOLD" },
+  { label: "SUSPENDED", value: "SUSPENDED" },
+];
+export const roleOptions = [
+  { label: "ADMIN", value: "ADMIN" },
+  { label: "COLLABORATOR", value: "COLLABORATOR" },
 ];
 
 // Temp
@@ -262,5 +269,373 @@ export const environmentsTableData = [
     name: "Development",
     isPrimary: false,
     status: "ACTIVE",
+  },
+];
+export const globalPermissions = [
+  {
+    permissionName: "ADD-PROJECT",
+    parent: "PROJECT",
+  },
+  {
+    permissionName: "VIEW-PROJECT",
+    parent: "PROJECT",
+  },
+  {
+    permissionName: "UPDATE-PROJECT",
+    parent: "PROJECT",
+  },
+  {
+    permissionName: "DELETE-PROJECT",
+    parent: "PROJECT",
+  },
+  {
+    permissionName: "ADD-ENVIRONMENT",
+    parent: "ENVIRONMENT",
+  },
+  {
+    permissionName: "VIEW-ENVIRONMENT",
+    parent: "ENVIRONMENT",
+  },
+  {
+    permissionName: "UPDATE-ENVIRONMENT",
+    parent: "ENVIRONMENT",
+  },
+  {
+    permissionName: "DELETE-ENVIRONMENT",
+    parent: "ENVIRONMENT",
+  },
+  {
+    permissionName: "UPLOAD-FILE",
+    parent: "FILE",
+  },
+  {
+    permissionName: "VIEW-FILE",
+    parent: "FILE",
+  },
+  {
+    permissionName: "UPDATE-FILE",
+    parent: "FILE",
+  },
+  {
+    permissionName: "DELETE-FILE",
+    parent: "FILE",
+  },
+  {
+    permissionName: "ADD-COLLABORATOR",
+    parent: "COLLABORATOR",
+  },
+  {
+    permissionName: "VIEW-COLLABORATOR",
+    parent: "COLLABORATOR",
+  },
+  {
+    permissionName: "UPDATE-COLLABORATOR",
+    parent: "COLLABORATOR",
+  },
+  {
+    permissionName: "DELETE-COLLABORATOR",
+    parent: "COLLABORATOR",
+  },
+  {
+    permissionName: "ADD-TEAM",
+    parent: "TEAM",
+  },
+  {
+    permissionName: "VIEW-TEAM",
+    parent: "TEAM",
+  },
+  {
+    permissionName: "UPDATE-TEAM",
+    parent: "TEAM",
+  },
+  {
+    permissionName: "DELETE-TEAM",
+    parent: "TEAM",
+  },
+];
+export const teamsTableData = [
+  {
+    id: 1,
+    name: "Anand Kumar Karn",
+    username: "anand_karn",
+    email: "anandsofzenix@gmail.com",
+    role: "ADMIN",
+    apiKey: "8k7854lfrd4",
+    permissions: [
+      {
+        permissionName: "ADD-PROJECT",
+        parent: "PROJECT",
+      },
+      {
+        permissionName: "VIEW-PROJECT",
+        parent: "PROJECT",
+      },
+      {
+        permissionName: "UPDATE-PROJECT",
+        parent: "PROJECT",
+      },
+      {
+        permissionName: "DELETE-PROJECT",
+        parent: "PROJECT",
+      },
+      {
+        permissionName: "ADD-ENVIRONMENT",
+        parent: "ENVIRONMENT",
+      },
+      {
+        permissionName: "VIEW-ENVIRONMENT",
+        parent: "ENVIRONMENT",
+      },
+      {
+        permissionName: "UPDATE-ENVIRONMENT",
+        parent: "ENVIRONMENT",
+      },
+      {
+        permissionName: "DELETE-ENVIRONMENT",
+        parent: "ENVIRONMENT",
+      },
+      {
+        permissionName: "UPLOAD-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "VIEW-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "UPDATE-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "DELETE-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "ADD-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "VIEW-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "UPDATE-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "DELETE-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "ADD-TEAM",
+        parent: "TEAM",
+      },
+      {
+        permissionName: "VIEW-TEAM",
+        parent: "TEAM",
+      },
+      {
+        permissionName: "UPDATE-TEAM",
+        parent: "TEAM",
+      },
+      {
+        permissionName: "DELETE-TEAM",
+        parent: "TEAM",
+      },
+    ],
+    status: "ACTIVE",
+  },
+  {
+    id: 2,
+    name: "Shivam Verma",
+    username: "shivam_verma",
+    email: "shivam.ds@gmail.com",
+    role: "ADMIN",
+    apiKey: "8k7854lfrd4",
+    permissions: [
+      {
+        permissionName: "ADD-PROJECT",
+        parent: "PROJECT",
+      },
+      {
+        permissionName: "VIEW-PROJECT",
+        parent: "PROJECT",
+      },
+      {
+        permissionName: "UPDATE-PROJECT",
+        parent: "PROJECT",
+      },
+      {
+        permissionName: "DELETE-PROJECT",
+        parent: "PROJECT",
+      },
+      {
+        permissionName: "ADD-ENVIRONMENT",
+        parent: "ENVIRONMENT",
+      },
+      {
+        permissionName: "VIEW-ENVIRONMENT",
+        parent: "ENVIRONMENT",
+      },
+      {
+        permissionName: "UPDATE-ENVIRONMENT",
+        parent: "ENVIRONMENT",
+      },
+      {
+        permissionName: "DELETE-ENVIRONMENT",
+        parent: "ENVIRONMENT",
+      },
+      {
+        permissionName: "UPLOAD-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "VIEW-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "UPDATE-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "DELETE-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "ADD-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "VIEW-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "UPDATE-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "DELETE-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "ADD-TEAM",
+        parent: "TEAM",
+      },
+      {
+        permissionName: "VIEW-TEAM",
+        parent: "TEAM",
+      },
+      {
+        permissionName: "UPDATE-TEAM",
+        parent: "TEAM",
+      },
+      {
+        permissionName: "DELETE-TEAM",
+        parent: "TEAM",
+      },
+    ],
+    status: "ACTIVE",
+  },
+  {
+    id: 3,
+    name: "Megha Kumari",
+    username: "megha_kumari",
+    email: "megha.mdb@gmail.com",
+    role: "COLLABORATOR",
+    apikey: "8k7854lfrd4",
+    permissions: [
+      {
+        permissionName: "VIEW-PROJECT",
+        parent: "PROJECT",
+      },
+      {
+        permissionName: "VIEW-ENVIRONMENT",
+        parent: "ENVIRONMENT",
+      },
+      {
+        permissionName: "UPLOAD-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "VIEW-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "UPDATE-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "DELETE-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "ADD-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "VIEW-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "UPDATE-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "DELETE-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+    ],
+    status: "ACTIVE",
+  },
+  {
+    id: 4,
+    name: "Aryan Karn",
+    username: "aryan_karn",
+    email: "aryankarn1995@gmail.com",
+    role: "COLLABORATOR",
+    apiKey: "8k7854lfrd4",
+    permissions: [
+      {
+        permissionName: "VIEW-PROJECT",
+        parent: "PROJECT",
+      },
+      {
+        permissionName: "VIEW-ENVIRONMENT",
+        parent: "ENVIRONMENT",
+      },
+      {
+        permissionName: "UPLOAD-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "VIEW-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "UPDATE-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "DELETE-FILE",
+        parent: "FILE",
+      },
+      {
+        permissionName: "ADD-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "VIEW-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "UPDATE-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+      {
+        permissionName: "DELETE-COLLABORATOR",
+        parent: "COLLABORATOR",
+      },
+    ],
+    status: "INVITE SENT",
   },
 ];
